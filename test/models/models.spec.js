@@ -43,7 +43,15 @@ describe('models', ()=> {
           .then( user => {
             expect(user.id).to.equal(mae.id);
           });
-        
+      });
+      it('throw with invalid token', ()=> {
+        const mae = usersMap['mae@glamsquad.com'];
+        const token = jwt.encode({ id: mae.id }, 'pdq');
+        return User.findByToken(token)
+          .then( user => {
+            throw 'should not get here';
+          })
+          .catch( ex => expect(ex.status).to.equal(401));
       });
     });
     describe('authenticate', ()=> {

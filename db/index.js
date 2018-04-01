@@ -18,8 +18,19 @@ const User = conn.define('user', {
 });
 
 User.findByToken = function(token){
-  const id = jwt.decode(token, JWT_SECRET).id;
-  return User.findById(id);
+  try {
+    const id = jwt.decode(token, JWT_SECRET).id;
+    return User.findById(id);
+  }
+  catch(ex){
+    if(ex.message === 'Signature verification failed'){
+      return Promise.reject({
+        status: 401
+      });
+    }
+    return Promise.reject({
+    });
+  };
 }
 
 User.authenticate = function(credentials){
