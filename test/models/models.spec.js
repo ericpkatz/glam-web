@@ -2,10 +2,11 @@ const JWT_SECRET = 'foo';
 process.env.JWT_SECRET = JWT_SECRET;
 
 const jwt = require('jwt-simple');
+const moment = require('moment');
 const expect = require('chai').expect;
 const db = require('../../db');
 const { models } = db;
-const { Service, User } = models;
+const { Service, User, Appointment } = models;
 
 describe('models', ()=> {
   let seed;
@@ -73,6 +74,20 @@ describe('models', ()=> {
           expect(er.status).to.equal(401);
         });
       });
+    });
+  });
+  describe('Appointment', ()=> {
+    it('exists', ()=> {
+      expect(Appointment).to.be.ok;
+    });
+    it('mae has a hair appointment in 2021', ()=> {
+      const mae = usersMap['mae@glamsquad.com'];
+      return Appointment.findByUser(mae)
+        .then( appointments => {
+          expect(appointments.length).to.equal(1);
+          expect(moment(appointments[0].time).get('year')).to.equal(2020);
+          expect(appointments[0].appointmentServices[0].service.name).to.equal('Hair');
+        });
     });
   });
 });
