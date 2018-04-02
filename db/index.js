@@ -1,9 +1,7 @@
 const JWT_SECRET = process.env.JWT_SECRET;
-const moment = require('moment');
 if(!JWT_SECRET){
   throw 'provide JWT_SECRET';
 }
-const jwt = require('jwt-simple');
 
 const conn = require('./conn');
 const User = require('./User');
@@ -19,7 +17,6 @@ Appointment.hasMany(AppointmentService);
 
 
 const syncAndSeed = ()=> {
-  let services, users, appointments;
   return conn.sync({ force: true })
     .then(()=> require('./seed')());
 };
