@@ -10,6 +10,8 @@ const app = express();
 
 module.exports = app;
 
+app.use('/public', express.static(path.join(__dirname, 'public')));
+
 app.use(require('body-parser').json());
 
 app.get('/', (req, res, next) => {
