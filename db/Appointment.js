@@ -2,7 +2,10 @@ const conn = require('./conn');
 const { Sequelize } = conn;
 
 const Appointment = conn.define('appointment', {
-  time: Sequelize.DATE
+  time: {
+    type: Sequelize.DATE,
+    allowNull: false
+  }
 });
 
 Appointment.findByUser = function(user){

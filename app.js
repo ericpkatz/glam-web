@@ -42,7 +42,7 @@ app.get('/api/users/:id/appointments', (req, res, next)=> {
 
 app.post('/api/users/:id/appointments', (req, res, next)=> {
   let appointment;
-  Appointment.create({ userId: req.params.id})
+  Appointment.create({ userId: req.params.id, time: req.body.time })
     .then( _appointment => {
       appointment = _appointment;
       return Promise.all(

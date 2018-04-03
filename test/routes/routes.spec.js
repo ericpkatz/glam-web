@@ -1,6 +1,11 @@
 const db = require('../../db');
 const app = require('supertest')(require('../../app'));
 const expect = require('chai').expect;
+const moment = require('moment');
+
+const xmas2021 = moment();
+xmas2021.set({ month: 11, year: 2021, date: 25, hour: 11, minutes: 30, seconds: 0 });
+
 
 describe('routes', ()=> {
   let seed;
@@ -108,6 +113,7 @@ describe('routes', ()=> {
           return app
                     .post(`/api/users/${user.id}/appointments`)
                     .send({
+                      time: xmas2021,
                       appointmentServices: [
                         {
                           serviceId: servicesMap['Hair'].id
