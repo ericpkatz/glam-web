@@ -42,4 +42,9 @@ User.authenticate = function(credentials){
   });
 };
 
+User.findAppointments = function(id){
+  return User.findById(id)
+    .then( user => conn.models.appointment.findByUser(user));
+};
+
 module.exports = User;
