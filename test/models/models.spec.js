@@ -1,5 +1,4 @@
-const JWT_SECRET = 'foo';
-process.env.JWT_SECRET = JWT_SECRET;
+const JWT_SECRET = process.env.JWT_SECRET;
 
 const jwt = require('jwt-simple');
 const moment = require('moment');
