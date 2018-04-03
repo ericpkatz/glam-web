@@ -4,6 +4,7 @@ const { models } = db;
 const { Service, User, Appointment, AppointmentService } = models;
 const jwt = require('jwt-simple');
 const JWT_SECRET = process.env.JWT_SECRET;
+const path = require('path');
 
 const app = express();
 
@@ -12,7 +13,7 @@ module.exports = app;
 app.use(require('body-parser').json());
 
 app.get('/', (req, res, next) => {
-  res.sendStatus(200);
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
 app.get('/api/services', (req, res, next) => {

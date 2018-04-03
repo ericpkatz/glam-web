@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "JWT_SECRET=foo DATABASE_URL=postgres://localhost/glam_web_test_db ./node_modules/mocha/bin/mocha --recursive --watch"
+    "test": "JWT_SECRET=foo DATABASE_URL=postgres://localhost/glam_web_test_db ./node_modules/mocha/bin/mocha --recursive --watch",
+    "start:dev": "JWT_SECRET=bar DATABASE_URL=postgres://localhost/glam_web nodemon server.js"
   },
   "keywords": [],
   "author": "",
