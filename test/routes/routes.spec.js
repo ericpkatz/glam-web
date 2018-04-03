@@ -4,13 +4,17 @@ const expect = require('chai').expect;
 
 describe('routes', ()=> {
   let seed;
-  let usersMap;
+  let usersMap, servicesMap;
   beforeEach(()=> {
     return db.syncAndSeed()
       .then( _seed => seed = _seed )
       .then( ()=> {
         usersMap = seed.users.reduce((memo, user)=> {
           memo[user.email] = user;
+          return memo;
+        }, {});
+        servicesMap = seed.services.reduce((memo, service)=> {
+          memo[service.name] = service;
           return memo;
         }, {});
       });
@@ -83,7 +87,51 @@ describe('routes', ()=> {
           expect(response.status).to.equal(200);
           expect(response.body.length).to.equal(1);
         });
-
+    });
+  });
+  describe('creating an appointments', ()=> {
+    it('a user can create an appointments', ()=> {
+      const mae = usersMap['mae@glamsquad.com'];
+      const { email, password } = mae;
+      const credentials = {
+        email,
+        password
+      };
+      return app.post('/api/sessions')
+        .send(credentials)
+        .expect(200)
+        .then( response => {
+          return app.get(`/api/sessions/${response.body.token}`);
+        })
+        .then( response => {
+          const user = response.body;
+          return app
+                    .post(`/api/users/${user.id}/appointments`)
+                    .send({
+                      appointmentServices: [
+                        {
+                          serviceId: servicesMap['Hair'].id
+                        },
+                        {
+                          serviceId: servicesMap['Makeup'].id
+                        }
+                      ]
+                    })
+                  
+        })
+        .then( response => {
+          expect(response.status).to.equal(200);
+          const appointmentServices = response.body.appointmentServices;
+          expect(appointmentServices.length).to.equal(2);
+          const serviceNames = appointmentServices.map( appointmentService => appointmentService.service.name );
+          expect(serviceNames.indexOf('Hair')).not.to.equal(-1);
+          expect(serviceNames.indexOf('Makeup')).not.to.equal(-1);
+          return app.get(`/api/users/${mae.id}/appointments`)
+        })
+        .then( response => {
+          expect(response.status).to.equal(200);
+          expect(response.body.length).to.equal(2);
+        });
     });
   });
 });
