@@ -34,7 +34,10 @@ describe('routes', ()=> {
   describe('/api/services', ()=> {
     it('returns three services', ()=> {
       return app.get('/api/services')
-        .expect(200);
+        .expect(200)
+        .then( result => {
+          expect(result.body.length).to.equal(3);
+        });
     });
   });
   describe('logging in', ()=> {
