@@ -5,13 +5,14 @@
   "main": "index.js",
   "scripts": {
     "test": "JWT_SECRET=foo DATABASE_URL=postgres://localhost/glam_web_test_db ./node_modules/mocha/bin/mocha --recursive --watch",
-    "start:dev": "JWT_SECRET=bar DATABASE_URL=postgres://localhost/glam_web nodemon server.js"
+    "start:dev": "JWT_SECRET=bar DATABASE_URL=postgres://localhost/glam_web nodemon server.js --ignore public/"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "angular": "^1.4.14",
+    "angular-ui-router": "^0.2.13",
     "chai": "^4.1.2",
     "express": "^4.16.3",
     "jwt-simple": "^0.5.1",
