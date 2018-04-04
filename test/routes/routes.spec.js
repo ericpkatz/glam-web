@@ -84,12 +84,12 @@ describe('routes', ()=> {
         .send(credentials)
         .expect(200)
         .then( response => {
-          return app.get(`/api/sessions/${response.body.token}`);
-        })
-        .then( response => {
           expect(response.status).to.equal(200);
-          const user = response.body;
-          return app.get(`/api/users/${user.id}/appointments`)
+          return (
+            app
+              .get(`/api/users/${mae.id}/appointments`)
+              .set('Authorization', response.body.token)
+          );
         })
         .then( response => {
           expect(response.status).to.equal(200);
@@ -105,16 +105,19 @@ describe('routes', ()=> {
         email,
         password
       };
+      let token;
       return app.post('/api/sessions')
         .send(credentials)
         .expect(200)
         .then( response => {
+          token = response.body.token;
           return app.get(`/api/sessions/${response.body.token}`);
         })
         .then( response => {
           const user = response.body;
           return app
                     .post(`/api/users/${user.id}/appointments`)
+                    .set('Authorization', token)
                     .send({
                       time: xmas2021,
                       appointmentServices: [
@@ -136,6 +139,7 @@ describe('routes', ()=> {
           expect(serviceNames.indexOf('Hair')).not.to.equal(-1);
           expect(serviceNames.indexOf('Makeup')).not.to.equal(-1);
           return app.get(`/api/users/${mae.id}/appointments`)
+                    .set('Authorization', token)
         })
         .then( response => {
           expect(response.status).to.equal(200);
