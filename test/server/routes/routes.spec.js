@@ -1,5 +1,5 @@
-const db = require('../../db');
-const app = require('supertest')(require('../../app'));
+const db = require('../../../db');
+const app = require('supertest')(require('../../../app'));
 const expect = require('chai').expect;
 const moment = require('moment');
 

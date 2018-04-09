@@ -3,7 +3,7 @@ const JWT_SECRET = process.env.JWT_SECRET;
 const jwt = require('jwt-simple');
 const moment = require('moment');
 const expect = require('chai').expect;
-const db = require('../../db');
+const db = require('../../../db');
 const { models } = db;
 const { Service, User, Appointment } = models;
 
