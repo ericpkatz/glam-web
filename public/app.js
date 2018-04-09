@@ -1,5 +1,6 @@
 var app = angular.module('glamsquad', ['ui.router']);
 
+/*
 app.config(function($stateProvider, $urlRouterProvider){
   $stateProvider 
     .state('home', {
@@ -7,3 +8,4 @@ app.config(function($stateProvider, $urlRouterProvider){
       template: 'Home'
     });
 });
+*/
