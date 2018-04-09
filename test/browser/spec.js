@@ -1,8 +1,12 @@
 describe('a test', function(){
-  it('true is true', ()=>{
-    expect(true).to.be.true;
-  });
-  it('`${5 * 5}` is "25"', ()=>{
-    expect(`${ 5 * 5}`).to.equal('25');
+  beforeEach(module('glamsquad'));
+  describe('FIZZ BUZZ', ()=> {
+    let FizzBuzzService;
+    beforeEach(inject(function(_FizzBuzzService_){
+      FizzBuzzService = _FizzBuzzService_;
+    }));
+    it('FizzBuzz exists', ()=> {
+      expect(FizzBuzzService.fizz).to.equal('buzz');
+    });
   });
 });
