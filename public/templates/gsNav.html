@@ -9,4 +9,19 @@
       Services ({{ serviceCount() }})
     </a>
   </li>
+  <li ng-if='!user.id'>
+    <a ui-sref='login' ui-sref-active='active'>
+      Login
+    </a>
+  </li>
+  <li ng-if='user.id'>
+    <a ui-sref='appointments' ui-sref-active='active'>
+      Appointments
+    </a>
+  </li>
+  <li ng-if='user.id' ng-click='logout()'>
+    <a href='#'>
+    Logout
+    </a>
+  </li>
 </ul>

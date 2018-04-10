@@ -8,11 +8,21 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider){
     .state('services', {
       url: '/services',
       templateUrl: '/templates/Services.html',
+    })
+    .state('login', {
+      url: '/login',
+      templateUrl: '/templates/login.html',
+      controller: 'LoginCtrl' 
+    })
+    .state('appointments', {
+      url: '/appointments',
+      template: '/templates/appointments.html',
     });
     $urlRouterProvider.otherwise('/');
 });
 
-app.run(function(ServiceService){
+app.run(function(ServiceService, AuthService){
   ServiceService.findAll();
+  AuthService.attemptLoginFromToken();
 });
 
