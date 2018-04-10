@@ -11,6 +11,7 @@ const app = express();
 module.exports = app;
 
 app.use('/public', express.static(path.join(__dirname, 'public')));
+app.use('/templates', express.static(path.join(__dirname, 'public', 'templates')));
 
 app.use('/vendor', express.static(path.join(__dirname, 'node_modules')));
 

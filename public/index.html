@@ -1,12 +1,24 @@
 <html>
   <head>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js'></script>
     <script src='/vendor/angular/angular.js'></script>
     <script src='/vendor/angular-ui-router/release/angular-ui-router.js'></script>
     <script src='/public/app.js'></script>
+    <script src='/public/gsNav.directive.js'></script>
+    <script src='/public/config.js'></script>
+    <script src='/public/ServiceListCtrl.js'></script>
+    <script src='/public/serviceList.directive.js'></script>
+    <script src='/public/service.service.js'></script>
+  <style>
+  a.active {
+    text-decoration: none;
+  }
+  </style>
   </head>
   <body ng-app='glamsquad'>
     <h1>Glam-Web</h1>
-    {{ 42 === 42  }}
-    <div ui-view></div>
+    <gs-nav></gs-nav>
+    <div gs-nav></div>
+    <ui-view></ui-view>
   </body>
 </html>

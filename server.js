@@ -7,4 +7,18 @@ server.listen(port, ()=> console.log(`listening on port ${port}`));
 
 db.syncAndSeed();
 
+require('./foo');
+require('./foo');
+require('./foo');
+require('./foo');
+require('./foo');
+require('./foo');
+require('./foo');
+require('./foo');
+require('./foo');
+require('./foo');
+require('./foo');
+require('./foo');
+require('./foo');
+
 
